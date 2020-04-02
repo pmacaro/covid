@@ -235,8 +235,9 @@
         Locate, Print, ScaleBar, Bookmarks, Graphic, GeometryEngine, Circle, SpatialReference, projection, ServiceAreaTask, ServiceAreaParameters, FeatureSet, watchUtils, ShareWidget) {
 
 
-        var center;
-        var zoomLevel;
+        var center = null;
+        var zoomLevel = null;
+        var mode = "";
 
         var positionParams = window.location.href.indexOf('?');
         if (positionParams > 0){
@@ -257,20 +258,26 @@
                             longitude: x,
                             latitude: y
                         };
-                        console.log("center",center);
                         break;
                     case "level":
                         zoomLevel = value;
-                        console.log("zoomLevel",zoomLevel);
+                        break;
                     default:
-                        console.log("Unknown URL param ",key);
-
+                        console.error("Unknown URL param '" + key + "'");
                 }
             })
-            console.log("center",center);
-            console.log("zoomLevel",zoomLevel);
-        }
 
+            if (center != null && zoomLevel != null){
+                mode = "param";
+                console.log("center",center);
+                console.log("zoomLevel",zoomLevel);
+                document.getElementById("introDiv").classList.add("hidden");
+            }
+            else
+            {
+                console.error("Problem with URL parameters");
+            }
+        }
 
         var webmap = new WebMap({
           portalItem: {
@@ -340,14 +347,22 @@
             ]
         });
 
+        if (mode != "param"){
+            center = {
+                type: "point", // autocasts as new Point()
+                longitude: x,
+                latitude: y
+            };
+            zoomLevel = 5;
+        }
         var view = new MapView({
             container: "viewDiv",
             map: webmap,
             constraints: {
                 rotationEnabled: false
             },
-            zoom: 5,
-            center: [3, 47]
+            zoom: zoomLevel,
+            center: center
         });
 
         // Gestion de l'intro/aide
@@ -376,13 +391,13 @@
 
         let intro = true;
         document.getElementById("about").addEventListener("click", function () {
-        document.getElementById("container").style.display = "flex";
-        //view.container.style.filter = "blur(10px)";
-        if (intro) {
-            document.getElementById("show-about").classList.remove("hidden");
-            document.getElementById("show-intro").classList.add("hidden");
-            intro = false;
-        }
+            document.getElementById("container").style.display = "flex";
+            //view.container.style.filter = "blur(10px)";
+            if (intro) {
+                document.getElementById("show-about").classList.remove("hidden");
+                document.getElementById("show-intro").classList.add("hidden");
+                intro = false;
+            }
         });
 
         view.ui.add("about", {
@@ -777,6 +792,11 @@
             //     symbol: zoneSym
             // });
             // view.graphics.add(bufferGraphic);
+        }
+
+        if (mode == "param"){
+            var locationGraphic = createGraphic(center);
+            computeZone(locationGraphic);
         }
 
         // RESPONSIVE DESIGN

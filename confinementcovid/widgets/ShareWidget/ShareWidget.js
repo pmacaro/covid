@@ -381,7 +381,7 @@ define(["require", "exports", "esri/core/tsSupport/declareExtendsHelper", "esri/
             return (widget_1.tsx("article", { class: this.classes(CSS.shareModal.calciteStyles.tabs.tabSection, CSS.shareModal.calciteStyles.tabs.jsTabSection, CSS.shareModal.shareTabStyles.tabSection, linkContentClass), bind: this, "aria-expanded": "" + this._linkTabExpanded }, state === "ready" ? (widget_1.tsx("div", null,
                 shareServicesNode,
                 !copyToClipboard || !shareServices ? null : (widget_1.tsx("hr", { class: CSS.shareModal.main.mainHR })),
-                copyUrlNode)) : (widget_1.tsx("div", { class: CSS.icons.esriLoader }))));
+                copyUrlNode)) : null/*(widget_1.tsx("div", { class: CSS.icons.esriLoader }))*/));
         };
         Share.prototype._renderCopyIframe = function () {
             var _a;
@@ -406,7 +406,7 @@ define(["require", "exports", "esri/core/tsSupport/declareExtendsHelper", "esri/
             return (widget_1.tsx("div", { class: CSS.shareModal.shareIframe.embedContentContainer }, embedMap ? (widget_1.tsx("article", { class: this.classes(CSS.shareModal.calciteStyles.tabs.tabSection, CSS.shareModal.calciteStyles.tabs.jsTabSection, CSS.shareModal.shareTabStyles.tabSection, CSS.shareModal.shareTabStyles.iframeTab, embedContentClass), bind: this, "aria-expanded": "" + this._embedTabExpanded }, state === "ready" ? (widget_1.tsx("div", { key: "iframe-tab-section-container", class: CSS.shareModal.shareIframe.iframeTabSectionContainer },
                 widget_1.tsx("h2", { class: CSS.shareModal.main.mainHeader }, i18n.clipboard),
                 copyIframeCodeNode,
-                widget_1.tsx("div", { class: CSS.shareModal.shareIframe.iframeContainer }, embedMap ? (state === "ready" ? (this.shareModalOpened ? (widget_1.tsx("iframe", { class: CSS.shareModal.shareIframe.iframePreview, src: this.shareUrl, tabIndex: "-1", scrolling: "no" })) : null) : null) : null))) : (widget_1.tsx("div", { class: CSS.icons.esriLoader })))) : null));
+                widget_1.tsx("div", { class: CSS.shareModal.shareIframe.iframeContainer }, embedMap ? (state === "ready" ? (this.shareModalOpened ? (widget_1.tsx("iframe", { class: CSS.shareModal.shareIframe.iframePreview, src: this.shareUrl, tabIndex: "-1", scrolling: "no" })) : null) : null) : null))) : null/*(widget_1.tsx("div", { class: CSS.icons.esriLoader }))*/ )) : null));
         };
         __decorate([
             decorators_1.aliasOf("viewModel.view"),

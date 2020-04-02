@@ -199,6 +199,7 @@ define(["require", "exports", "esri/core/tsSupport/declareExtendsHelper", "esri/
         Share.prototype.destroy = function () {
             this._iframeInputNode = null;
             this._urlInputNode = null;
+            this._removeCopyTooltips();
         };
         Share.prototype.render = function () {
             // var shareModalNode = this._renderShareModal();
@@ -207,6 +208,7 @@ define(["require", "exports", "esri/core/tsSupport/declareExtendsHelper", "esri/
             //     shareModalNode));
 
             var modalContentNode = this._renderModalContent();
+            this._generateUrl();
             return (widget_1.tsx("div", { class: this.classes(CSS.base, CSS.shareModalStyles), tabIndex: 0, bind: this, onclick: this._stopPropagation, onkeydown: this._stopPropagation },
                 widget_1.tsx("h1", { id: "shareModal", class: CSS.shareModal.header.heading }, i18n.heading),
                 widget_1.tsx("div", null, modalContentNode)));

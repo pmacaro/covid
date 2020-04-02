@@ -234,7 +234,6 @@
       ], function(Basemap, WebMap, Map, MapImageLayer, MapView, Zoom, Home, Expand, Search, BasemapGallery, LocalBasemapsSource, Locator, LocatorSearchSource,
         Locate, Print, ScaleBar, Bookmarks, Graphic, GeometryEngine, Circle, SpatialReference, projection, ServiceAreaTask, ServiceAreaParameters, FeatureSet, watchUtils, ShareWidget) {
 
-
         var center = null;
         var zoomLevel = null;
         var mode = "";
@@ -269,14 +268,15 @@
 
             if (center != null && zoomLevel != null){
                 mode = "param";
-                console.log("center",center);
-                console.log("zoomLevel",zoomLevel);
-                document.getElementById("introDiv").classList.add("hidden");
             }
             else
             {
                 console.error("Problem with URL parameters");
             }
+        }
+
+        if (mode != "param"){
+            document.getElementById("introDiv").classList.remove("hidden");
         }
 
         var webmap = new WebMap({
@@ -394,6 +394,7 @@
             document.getElementById("container").style.display = "flex";
             //view.container.style.filter = "blur(10px)";
             if (intro) {
+                document.getElementById("introDiv").classList.remove("hidden");
                 document.getElementById("show-about").classList.remove("hidden");
                 document.getElementById("show-intro").classList.add("hidden");
                 intro = false;
@@ -896,7 +897,7 @@
         </div>
     </div>
     <div id="container">
-        <div id="introDiv">
+        <div id="introDiv" class="hidden">
             <h1>Carte du confinement : le périmètre d'1 kilomètre</h1>
             <div id="show-intro">
                 <p class="intro-p-desktop">Bienvenue ! Pour calculer la zone à 1 km autour de chez vous, 2 méthodes possibles :​</p>

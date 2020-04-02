@@ -201,10 +201,16 @@ define(["require", "exports", "esri/core/tsSupport/declareExtendsHelper", "esri/
             this._urlInputNode = null;
         };
         Share.prototype.render = function () {
-            var shareModalNode = this._renderShareModal();
-            return (widget_1.tsx("div", { class: CSS.base, "aria-labelledby": "shareModal" },
-                widget_1.tsx("button", { class: this.classes(CSS.shareModal.calciteStyles.modal.jsModalToggle, CSS.icons.widgetIcon, CSS.shareButton), bind: this, title: i18n.heading, onclick: this._toggleShareModal, onkeydown: this._toggleShareModal }),
-                shareModalNode));
+            // var shareModalNode = this._renderShareModal();
+            // return (widget_1.tsx("div", { class: CSS.base, "aria-labelledby": "shareModal" },
+            //     widget_1.tsx("button", { class: this.classes(CSS.shareModal.calciteStyles.modal.jsModalToggle, CSS.icons.widgetIcon, CSS.shareButton), bind: this, title: i18n.heading, onclick: this._toggleShareModal, onkeydown: this._toggleShareModal }),
+            //     shareModalNode));
+
+            var modalContentNode = this._renderModalContent();
+            return (widget_1.tsx("div", { class: this.classes(CSS.base, CSS.shareModalStyles), tabIndex: 0, bind: this, onclick: this._stopPropagation, onkeydown: this._stopPropagation },
+                widget_1.tsx("h1", { id: "shareModal", class: CSS.shareModal.header.heading }, i18n.heading),
+                widget_1.tsx("div", null, modalContentNode)));
+    
         };
         Share.prototype._toggleShareModal = function () {
             this.shareModalOpened = !this.shareModalOpened;

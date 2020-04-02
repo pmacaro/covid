@@ -434,15 +434,27 @@
                 select.value = "a4-landscape";
             });
 
-            // Widget Print
+            // Widget Share
             const shareWidget = new ShareWidget({
                 view,
                 container: document.createElement("div")
             });
-            view.ui.add(shareWidget, {
+            // Affichage du widget Share sous forme d'un objet Expand
+            const shareExpand = new Expand({
+            	view: view,
+            	content: shareWidget,
+                expandTooltip: "Partager",
+                group: "expands"
+            });
+            view.ui.add(shareExpand, {
                 position: "top-right",
                 index: 2
             });
+
+            // view.ui.add(shareWidget, {
+            //     position: "top-right",
+            //     index: 2
+            // });
 
             const locateWidget = new Locate({
                 view: view,

@@ -451,6 +451,10 @@
                 index: 2
             });
 
+            shareExpand.watch("expanded ", function(value){
+                shareWidget.shareModalOpened = value;
+            });
+
             // view.ui.add(shareWidget, {
             //     position: "top-right",
             //     index: 2

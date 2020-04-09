@@ -218,25 +218,26 @@
         "esri/geometry/geometryEngine",
         "esri/geometry/Circle",
         "esri/geometry/SpatialReference",
-        "esri/geometry/projection",
         "esri/tasks/ServiceAreaTask",
         "esri/tasks/support/ServiceAreaParameters",
         "esri/tasks/support/FeatureSet",
         "esri/core/watchUtils",
         "widgets/ShareWidget/ShareWidget"
       ], function(Basemap, WebMap, Map, MapImageLayer, MapView, Zoom, Home, Expand, Search, BasemapGallery, LocalBasemapsSource, Locator, LocatorSearchSource,
-        Locate, Print, ScaleBar, Bookmarks, Graphic, GeometryEngine, Circle, SpatialReference, projection, ServiceAreaTask, ServiceAreaParameters, FeatureSet, watchUtils, ShareWidget) {
+        Locate, Print, ScaleBar, Bookmarks, Graphic, GeometryEngine, Circle, SpatialReference, ServiceAreaTask, ServiceAreaParameters, FeatureSet, watchUtils, ShareWidget) {
 
         var center = null;
         var zoomLevel = null;
         var mode = "";
 
+        // Décodage des paramètres de l'URL, s'il y en a (centrage et niveau de zoom)
         var positionParams = window.location.href.indexOf('?');
         if (positionParams > 0){
             var endUrl = window.location.href.substr(positionParams + 1);
 
             var params = endUrl.split("&");
             params.forEach(param => {
+                // Récupération de chaque couple key=value
                 var paramKeyValue = param.split("=");
                 var key = paramKeyValue[0];
                 var value = paramKeyValue[1];
@@ -420,7 +421,7 @@
                 index: 1
             });
 
-            printExpand.watch("expanded ", function(value){
+            printExpand.watch("expanded", function(value){
                 var select = document.querySelectorAll("[data-target-property='layout']")[0];
                 select.value = "a4-landscape";
             });
@@ -450,6 +451,7 @@
             });
 
             shareExpand.watch("expanded ", function(value){
+                // Déclenchement manuel de la génération d'URL
                 shareWidget.shareModalOpened = value;
             });
 

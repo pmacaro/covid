@@ -342,7 +342,7 @@ define(["require", "exports", "esri/core/tsSupport/declareExtendsHelper", "esri/
             });
         };
         ShareViewModel.prototype._roundValue = function (val) {
-            return parseFloat(val.toFixed(4));
+            return parseFloat(val.toFixed(6));
         };
         __decorate([
             decorators_1.property({

@@ -455,6 +455,14 @@
                 shareWidget.shareModalOpened = value;
             });
 
+            view.watch("stationary", function(isStationary){
+                // Si on touche à la carte, on force la fermeture du widget share pour forcer
+                // la génération d'un nouveau lien de partage mis à jour avec les nouvelles coordonnées
+                if (!isStationary){
+                    shareExpand.collapse();
+                }
+            });
+
             const locateWidget = new Locate({
                 view: view,
                 graphic: new Graphic({

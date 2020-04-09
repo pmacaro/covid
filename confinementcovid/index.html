@@ -735,13 +735,13 @@
         }
 
         function executeServiceAreaTask(serviceAreaParams) {
+            var centerPoint = serviceAreaParams[1].facilities.features[0];
             serviceAreaTask2.solve(serviceAreaParams[1]).then(function(result){
                 if (result.serviceAreaPolygons.length) {
                     // Draw each service area polygon
                     result.serviceAreaPolygons.forEach(function(graphic){
                         graphic.symbol = zoneSym;
                         view.graphics.add(graphic,0);
-                        view.goTo(graphic);
                     });
                 }
             }, function(error){
@@ -752,7 +752,6 @@
                         result.serviceAreaPolygons.forEach(function(graphic){
                             graphic.symbol = zoneSym;
                             view.graphics.add(graphic,0);
-                            view.goTo(graphic);
                         });
                     }
                 }, function(error){
@@ -782,6 +781,8 @@
 
             var serviceAreaParams = createServiceAreaParams(graphicCenter, view.spatialReference);
             executeServiceAreaTask(serviceAreaParams);
+
+            view.goTo(graphicCircle);
 
             // var buffer = GeometryEngine.buffer(graphicCenter.geometry, 1, "kilometers");
             // var bufferGraphic = new Graphic({

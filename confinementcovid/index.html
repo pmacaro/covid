@@ -425,6 +425,13 @@
                 select.value = "a4-landscape";
             });
 
+            view.watch("scale", function(value){
+                // Manually update printed scale as printed scale is only an integer
+                // So to be sure to get same result than in the application, printed scale must be current scale truncated to integer 
+                printWidget.templateOptions.scaleEnabled = true;
+                printWidget.templateOptions.scale = Math.trunc(view.scale);
+            });
+
             // Widget Share
             const shareWidget = new ShareWidget({
                 view,
@@ -746,34 +753,22 @@
 
         function computeZone(graphicCenter){
 
-            // Draw simple circle, only if supported by browser
-            if (projection.isSupported()) {
-                projection.load().then(function() {
-                    const outSpatialReference = new SpatialReference({ wkid: 2154 });
+            // Draw simple circle
+            var circle = GeometryEngine.geodesicBuffer(graphicCenter.geometry, 1, "kilometers");
 
-                    var geom_proj = projection.project(graphicCenter.geometry, outSpatialReference);
-
-                    var circle = new Circle({
-                        center: geom_proj,
-                        radius: 1000
-                    });
-
-
-                    var graphicCircle = new Graphic({
-                    geometry: circle,
-                    symbol: {
-                            type: "simple-fill",
-                            color: "rgba(0,122,194,0)",
-                            outline: {  // autocasts as new SimpleLineSymbol()
-                                color: "rgba(0,122,194,100)",
-                                width: 2,
-                                style: "short-dot"
-                            }
-                        }
-                    });
-                    view.graphics.add(graphicCircle,0);
-                });
-            }
+            var graphicCircle = new Graphic({
+            geometry: circle,
+            symbol: {
+                    type: "simple-fill",
+                    color: "rgba(0,122,194,0)",
+                    outline: {  // autocasts as new SimpleLineSymbol()
+                        color: "rgba(0,122,194,100)",
+                        width: 2,
+                        style: "short-dot"
+                    }
+                }
+            });
+            view.graphics.add(graphicCircle,0);
 
             var serviceAreaParams = createServiceAreaParams(graphicCenter, view.spatialReference);
             executeServiceAreaTask(serviceAreaParams);

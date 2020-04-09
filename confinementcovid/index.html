@@ -8,7 +8,6 @@
     <title>Carte du confinement : le périmètre d'1 kilomètre</title>
 
     <style>
-
         html,
         body,
         #viewDiv,
@@ -183,15 +182,9 @@
             display: none;
         }
     </style>
-    <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/css/calcite-web.min.css">
-    <link
-        rel="stylesheet"
-        href="https://js.arcgis.com/4.14/esri/themes/light/main.css"
-    />
-    <link
-        rel="stylesheet"
-        href="./widgets/ShareWidget/css/Share.css"
-    />
+    <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/css/calcite-web.min.css"/>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.14/esri/themes/light/main.css"/>
+    <link rel="stylesheet" href="./widgets/ShareWidget/css/Share.css"/>
     <script>
         var locationPath = location.pathname.replace(/\/[^\/]+$/, "");
         window.dojoConfig = {
@@ -379,7 +372,7 @@
             if (e.target.id === "container") {
                 closeMenu();
                 view.when(function () {
-                watchUtils.whenFalseOnce(view, "updating", rotate);
+                    watchUtils.whenFalseOnce(view, "updating", rotate);
                 });
             }
         });
@@ -413,9 +406,6 @@
             // Widget Print
             const printWidget = new Print({
                 view: view,
-                // specify your own print service
-                //printServiceUrl: "https://utility.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task"
-                //printServiceUrl: "https://maps.esrifrance.fr/server/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task"
                 printServiceUrl: "https://wssecured.esrifrance.fr/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task"
             });
             // Affichage du widget Print sous forme d'un objet Expand
@@ -455,11 +445,6 @@
             shareExpand.watch("expanded ", function(value){
                 shareWidget.shareModalOpened = value;
             });
-
-            // view.ui.add(shareWidget, {
-            //     position: "top-right",
-            //     index: 2
-            // });
 
             const locateWidget = new Locate({
                 view: view,
@@ -529,12 +514,6 @@
             unit: "metric"
         });
 
-        // // Mobile
-        // var expandWidget = new Expand({
-        //   view: view,
-        //   content: document.getElementById("searchDiv")
-        // });
-
         // CHARGEMENT WIDGETS
         // Boutons de zoom supprimés pour pouvoir placer le titre en haut à droite
         view.ui.remove("zoom");
@@ -568,8 +547,6 @@
         view.ui.add(scaleBarWidget, {
             position: "bottom-left"
         });
-
-
 
         // Affichage du cadre consignes du gouvernement
         view.ui.add("source", {
@@ -660,8 +637,6 @@
                     }
                 }
             });
-
-            
 
             // Affichage du graphic créé
             view.graphics.add(graphic);

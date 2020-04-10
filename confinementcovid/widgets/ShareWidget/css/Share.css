@@ -36,9 +36,6 @@
     font-size: 0.9375rem;
     color: #6e6e6e;
   }
-  .esri-share {
-    box-sizing: border-box;
-  }
   .esri-share__share-button {
     border: 0;
     background-color: #fff;
@@ -83,12 +80,6 @@
   .esri-share__copy-clipboard-url:hover, .esri-share__copy-clipboard-iframe:hover {
     background-color: gold;
     cursor: pointer;
-  }
-  .esri-share__share-modal {
-    color: #949494;
-    background: #fff;
-    box-sizing: border-box;
-    min-width: 315px;
   }
   .esri-share__heading {
     padding: 2% 4%;

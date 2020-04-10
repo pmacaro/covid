@@ -450,7 +450,7 @@
                 index: 2
             });
 
-            shareExpand.watch("expanded ", function(value){
+            shareExpand.watch("expanded", function(value){
                 // Déclenchement manuel de la génération d'URL
                 shareWidget.shareModalOpened = value;
             });
@@ -458,7 +458,7 @@
             view.watch("stationary", function(isStationary){
                 // Si on touche à la carte, on force la fermeture du widget share pour forcer
                 // la génération d'un nouveau lien de partage mis à jour avec les nouvelles coordonnées
-                if (!isStationary){
+                if (!isStationary && view.widthBreakpoint != "xsmall"){
                     shareExpand.collapse();
                 }
             });

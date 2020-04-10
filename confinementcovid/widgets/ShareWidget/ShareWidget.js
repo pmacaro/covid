@@ -28,7 +28,7 @@ define(["require", "exports", "esri/core/tsSupport/declareExtendsHelper", "esri/
     //----------------------------------
     var CSS = {
         base: "esri-share",
-        shareModalStyles: "esri-share__share-modal",
+        shareModalStyles: "esri-widget esri-widget--panel",
         shareButton: "esri-share__share-button",
         shareModal: {
             close: "esri-share__close",

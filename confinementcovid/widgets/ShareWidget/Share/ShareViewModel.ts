@@ -224,7 +224,7 @@ class ShareViewModel extends declared(Accessor) {
     const { graphics } = this.view;
     console.log("graphics",graphics);
     if (graphics != null && graphics.length > 0){
-      geom = graphics[0].geometry;
+      geom = graphics.getItemAt(0).geometry;
     } else {
       geom = this.view.center
     }

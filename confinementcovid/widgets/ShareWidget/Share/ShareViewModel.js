@@ -236,7 +236,7 @@ define(["require", "exports", "esri/core/tsSupport/declareExtendsHelper", "esri/
                             graphics = this.view.graphics;
                             console.log("graphics", graphics);
                             if (graphics != null && graphics.length > 0) {
-                                geom = graphics[0].geometry;
+                                geom = graphics.getItemAt(0).geometry;
                             }
                             else {
                                 geom = this.view.center;

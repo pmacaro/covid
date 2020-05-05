@@ -233,7 +233,12 @@ define(["require", "exports", "esri/core/tsSupport/declareExtendsHelper", "esri/
                             if (!this.get("view.ready")) {
                                 return [2 /*return*/, href];
                             }
-                            _a = this.view.center, x = _a.x, y = _a.y;
+                            if(this.view.graphics != null && this.view.graphics.length > 0){
+                                _a = this.view.graphics[0];
+                            } else {
+                                _a = this.view.center;
+                            }
+                            x = _a.x, y = _a.y;
                             spatialReference = this.view.spatialReference;
                             centerPoint = new Point({
                                 x: x,

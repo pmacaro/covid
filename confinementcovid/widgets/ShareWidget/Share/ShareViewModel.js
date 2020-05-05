@@ -234,7 +234,7 @@ define(["require", "exports", "esri/core/tsSupport/declareExtendsHelper", "esri/
                                 return [2 /*return*/, href];
                             }
                             if(this.view.graphics != null && this.view.graphics.length > 0){
-                                _a = this.view.graphics[0];
+                                _a = this.view.graphics[0].geometry;
                             } else {
                                 _a = this.view.center;
                             }

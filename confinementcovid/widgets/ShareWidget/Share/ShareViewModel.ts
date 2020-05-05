@@ -221,8 +221,11 @@ class ShareViewModel extends declared(Accessor) {
     }
     // Use x/y values and the spatial reference of the view to instantiate a geometry point
     let geom;
-    if(this.view.graphics != null && this.view.graphics.length > 0){
-      geom = this.view.graphics[0].geometry;
+
+    const { graphics } = this.view;
+
+    if(graphics != null && graphics.length > 0){
+      geom = graphics[0].geometry;
     } else {
       geom = this.view.center;
     }

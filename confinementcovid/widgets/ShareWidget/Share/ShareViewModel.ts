@@ -135,7 +135,7 @@ class ShareViewModel extends declared(Accessor) {
     readOnly: true
   })
   get embedCode(): string {
-    return `<iframe src="${this.shareUrl}" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>`;
+    return `<iframe src="${this.shareUrl}" allow="geolocation" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>`;
   }
 
   //----------------------------------
@@ -221,13 +221,12 @@ class ShareViewModel extends declared(Accessor) {
     }
     // Use x/y values and the spatial reference of the view to instantiate a geometry point
     let geom;
-
     const { graphics } = this.view;
-
-    if(graphics != null && graphics.length > 0){
+    console.log("graphics",graphics);
+    if (graphics != null && graphics.length > 0){
       geom = graphics[0].geometry;
     } else {
-      geom = this.view.center;
+      geom = this.view.center
     }
     const { x, y } = geom;
     const { spatialReference } = this.view;
@@ -322,7 +321,7 @@ class ShareViewModel extends declared(Accessor) {
   }
 
   private _roundValue(val: number): number {
-    return parseFloat(val.toFixed(4));
+    return parseFloat(val.toFixed(6));
   }
 }
 

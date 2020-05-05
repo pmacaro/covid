@@ -224,21 +224,24 @@ define(["require", "exports", "esri/core/tsSupport/declareExtendsHelper", "esri/
         //----------------------------------
         ShareViewModel.prototype._generateShareUrl = function () {
             return __awaiter(this, void 0, void 0, function () {
-                var href, _a, x, y, spatialReference, centerPoint, point;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
+                var href, geom, graphics, x, y, spatialReference, centerPoint, point;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
                         case 0:
                             href = window.location.href;
                             // If view is not ready
                             if (!this.get("view.ready")) {
                                 return [2 /*return*/, href];
                             }
-                            if(this.view.graphics != null && this.view.graphics.length > 0){
-                                _a = this.view.graphics[0].geometry;
-                            } else {
-                                _a = this.view.center;
+                            graphics = this.view.graphics;
+                            console.log("graphics", graphics);
+                            if (graphics != null && graphics.length > 0) {
+                                geom = graphics[0].geometry;
                             }
-                            x = _a.x, y = _a.y;
+                            else {
+                                geom = this.view.center;
+                            }
+                            x = geom.x, y = geom.y;
                             spatialReference = this.view.spatialReference;
                             centerPoint = new Point({
                                 x: x,
@@ -247,7 +250,7 @@ define(["require", "exports", "esri/core/tsSupport/declareExtendsHelper", "esri/
                             });
                             return [4 /*yield*/, this._processPoint(centerPoint)];
                         case 1:
-                            point = _b.sent();
+                            point = _a.sent();
                             return [2 /*return*/, this._generateShareUrlParams(point)];
                     }
                 });

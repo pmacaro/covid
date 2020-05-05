@@ -234,7 +234,6 @@ define(["require", "exports", "esri/core/tsSupport/declareExtendsHelper", "esri/
                                 return [2 /*return*/, href];
                             }
                             graphics = this.view.graphics;
-                            console.log("graphics", graphics);
                             if (graphics != null && graphics.length > 0) {
                                 geom = graphics.getItemAt(0).geometry;
                             }
